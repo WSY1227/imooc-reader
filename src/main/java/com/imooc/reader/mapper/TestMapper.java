@@ -1,14 +1,18 @@
 package com.imooc.reader.mapper;
 
-import org.springframework.stereotype.Repository;
+import com.imooc.reader.entity.Test;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * @ClassName: TestMapper
- * @Description: 测试接口
- * @author: XU
- * @date: 2022/9/1 11:31
- **/
-@Repository
-public interface TestMapper {
-    public void insertSample();
+* @author xu
+* @description 针对表【test】的数据库操作Mapper
+* @createDate 2022-09-01 18:34:04
+* @Entity com.imooc.reader.entity.Test
+*/
+public interface TestMapper extends BaseMapper<Test> {
+
 }
+
+
+
+

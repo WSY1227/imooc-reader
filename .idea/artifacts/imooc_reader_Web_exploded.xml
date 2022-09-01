@@ -37,6 +37,23 @@
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.7" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.8" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.3.8" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.3" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-annotation:3.5.2" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-core:3.5.2" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus-extension:3.5.2" />
+          <element id="library" level="project" name="Maven: com.baomidou:mybatis-plus:3.5.2" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:4.4" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.6.21" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.21" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.21" />
+          <element id="library" level="project" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.6.21" />
+          <element id="library" level="project" name="Maven: org.jetbrains:annotations:13.0" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.7" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.10" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.18.20" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:5.3.8" />
         </element>
       </element>
     </root>
