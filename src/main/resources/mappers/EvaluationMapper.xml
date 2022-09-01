@@ -5,22 +5,31 @@
 <mapper namespace="com.imooc.reader.mapper.EvaluationMapper">
 
     <resultMap id="BaseResultMap" type="com.imooc.reader.entity.Evaluation">
-            <id property="evaluationId" column="evaluation_id" jdbcType="BIGINT"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="score" column="score" jdbcType="INTEGER"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="memberId" column="member_id" jdbcType="BIGINT"/>
-            <result property="bookId" column="book_id" jdbcType="BIGINT"/>
-            <result property="enjoy" column="enjoy" jdbcType="INTEGER"/>
-            <result property="state" column="state" jdbcType="VARCHAR"/>
-            <result property="disableReason" column="disable_reason" jdbcType="VARCHAR"/>
-            <result property="disableTime" column="disable_time" jdbcType="TIMESTAMP"/>
+        <id property="evaluationId" column="evaluation_id" jdbcType="BIGINT"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="score" column="score" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="memberId" column="member_id" jdbcType="BIGINT"/>
+        <result property="bookId" column="book_id" jdbcType="BIGINT"/>
+        <result property="enjoy" column="enjoy" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="disableReason" column="disable_reason" jdbcType="VARCHAR"/>
+        <result property="disableTime" column="disable_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        evaluation_id,content,score,
+        evaluation_id
+        ,content,score,
         create_time,member_id,book_id,
         enjoy,state,disable_reason,
         disable_time
     </sql>
+    <select id="selectByBookId" resultType="java.util.LinkedHashMap">
+        select e.*, m.nickname
+        from evaluation e,
+             member m
+        where e.member_id = m.member_id
+          and e.book_id = #{value}
+        order by e.create_time desc
+    </select>
 </mapper>
