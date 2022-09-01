@@ -22,7 +22,7 @@ public class CategoryController {
     @Resource
     private CategoryService categoryService;
 
-    //查询所有分类
+    //查询所有图书分类
     @GetMapping("/list")
     public ResponseUtils list() {
         ResponseUtils resp = null;
