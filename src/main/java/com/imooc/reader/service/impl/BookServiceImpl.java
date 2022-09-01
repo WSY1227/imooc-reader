@@ -43,6 +43,11 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book>
         p = bookMapper.selectPage(p, wrapper);
         return p;
     }
+
+    @Override
+    public Book selectById(Long bookId) {
+        return bookMapper.selectById(bookId);
+    }
 }
 
 
