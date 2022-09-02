@@ -44,4 +44,11 @@ public interface BookService extends IService<Book> {
      * @return
      */
     public IPage<Map> selectBookMap(Integer page, Integer rows);
+
+    /**
+     * 新增图书
+     * @param book
+     * @return
+     */
+    public Book createBook(Book book);
 }

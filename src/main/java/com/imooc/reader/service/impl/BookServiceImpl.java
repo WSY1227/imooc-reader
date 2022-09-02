@@ -64,6 +64,13 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book>
         p = bookMapper.selectBookMap(p);
         return p;
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Book createBook(Book book) {
+        bookMapper.insert(book);
+        return book;
+    }
 }
 
 

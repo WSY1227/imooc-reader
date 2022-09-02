@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.imooc.reader.entity.Book;
 import com.imooc.reader.service.BookService;
 import com.imooc.reader.utils.ResponseUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,7 +53,38 @@ public class MBookController {
     }
 
     /**
+     * 新增图书接口
+     * @param book
+     * @return
+     */
+    @PostMapping("/createBook")
+    public ResponseUtils createBook(Book book) {
+        ResponseUtils resp = null;
+        try {
+            Document doc = Jsoup.parse(book.getDescription());
+            //拿到所有img标签
+            Elements elements = doc.select("img");
+            if (elements.size() == 0) {
+                resp = new ResponseUtils("ImageNotFoundError", "图书描述未包含图片封面");
+                return resp;
+            }
+            //拿到第一个img标签的src路径作为封面路径
+            String cover = elements.first().attr("src");
+            book.setCover(cover);
+            book.setEvaluationScore(0d);
+            book.setEvaluationQuantity(0);
+            bookService.createBook(book);
+            resp = new ResponseUtils().put("book", book);
+        } catch (Exception e) {
+            e.printStackTrace();
+            new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+        return resp;
+    }
+
+    /**
      * 文件上传保存
+     *
      * @param file
      * @param request
      * @return 返回上传路径和状态码
