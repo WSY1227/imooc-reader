@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity com.imooc.reader.entity.Book
 */
 public interface BookMapper extends BaseMapper<Book> {
-
+    public void updateScore();
 }
 
 

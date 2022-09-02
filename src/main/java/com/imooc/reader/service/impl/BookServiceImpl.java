@@ -8,6 +8,7 @@ import com.imooc.reader.entity.Book;
 import com.imooc.reader.service.BookService;
 import com.imooc.reader.mapper.BookMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -47,6 +48,12 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book>
     @Override
     public Book selectById(Long bookId) {
         return bookMapper.selectById(bookId);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void updateScore() {
+        bookMapper.updateScore();
     }
 }
 

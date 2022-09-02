@@ -102,4 +102,6 @@
             </bean>
         </property>
     </bean>
+    <!--启用注解形式的注解功能-->
+    <task:annotation-driven/>
 </beans>

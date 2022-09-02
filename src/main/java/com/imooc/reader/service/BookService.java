@@ -28,4 +28,9 @@ public interface BookService extends IService<Book> {
      * @return
      */
     public Book selectById(Long bookId);
+
+    /**
+     * 更新图书评分和评论总人数
+     */
+    public void updateScore();
 }
