@@ -17,4 +17,14 @@ public interface MemberReadStateService extends IService<MemberReadState> {
      * @return
      */
     public MemberReadState selectMemberReadState(Long memberId, Long bookId);
+
+    /**
+     * 修改阅读状态
+     *
+     * @param memberId
+     * @param bookId
+     * @param readState
+     * @return
+     */
+    public MemberReadState updateMemberReadState(Long memberId, Long bookId, Integer readState);
 }

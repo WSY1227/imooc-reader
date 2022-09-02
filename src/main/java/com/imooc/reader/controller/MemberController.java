@@ -116,4 +116,25 @@ public class MemberController {
         }
         return resp;
     }
+
+    /**
+     * 更新阅读状态
+     *
+     * @param memberId  用户id
+     * @param bookId    图书id
+     * @param readState 阅读状态
+     * @return
+     */
+    @PostMapping("/update_read_state")
+    public ResponseUtils updateReadState(Long memberId, Long bookId, Integer readState) {
+        ResponseUtils resp;
+        try {
+            MemberReadState memberReadState = memberReadStateService.updateMemberReadState(memberId, bookId, readState);
+            resp = new ResponseUtils().put("readState", memberReadState);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+        return resp;
+    }
 }

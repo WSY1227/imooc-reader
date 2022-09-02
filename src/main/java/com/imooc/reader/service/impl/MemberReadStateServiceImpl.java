@@ -8,6 +8,7 @@ import com.imooc.reader.mapper.MemberReadStateMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 
 /**
  * @author xu
@@ -26,6 +27,29 @@ public class MemberReadStateServiceImpl extends ServiceImpl<MemberReadStateMappe
         wrapper.eq("book_id", bookId);
         wrapper.eq("member_id", memberId);
         MemberReadState memberReadState = memberReadStateMapper.selectOne(wrapper);
+        return memberReadState;
+    }
+
+    @Override
+    public MemberReadState updateMemberReadState(Long memberId, Long bookId, Integer readState) {
+        QueryWrapper<MemberReadState> wrapper = new QueryWrapper<>();
+        wrapper.eq("book_id", bookId);
+        wrapper.eq("member_id", memberId);
+        MemberReadState memberReadState = memberReadStateMapper.selectOne(wrapper);
+        //查询为空时进行插入
+        if (memberReadState == null) {
+            memberReadState = new MemberReadState();
+            memberReadState.setMemberId(memberId);
+            memberReadState.setBookId(bookId);
+            memberReadState.setReadState(readState);
+            memberReadState.setCreateTime(LocalDateTime.now());
+            memberReadStateMapper.insert(memberReadState);
+        } else {
+            //不为空进行修改更新
+            memberReadState.setReadState(readState);
+            memberReadState.setCreateTime(LocalDateTime.now());
+            memberReadStateMapper.updateById(memberReadState);
+        }
         return memberReadState;
     }
 }
