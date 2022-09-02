@@ -47,6 +47,7 @@ public interface BookService extends IService<Book> {
 
     /**
      * 新增图书
+     *
      * @param book
      * @return
      */
@@ -54,9 +55,17 @@ public interface BookService extends IService<Book> {
 
     /**
      * 更新图书
+     *
      * @param book
      * @return
      */
     public Book updateBook(Book book);
+
+    /**
+     * 删除图书
+     * @param bookId 图书id
+     * @return
+     */
+    public Book deleteBook(Long bookId);
 
 }

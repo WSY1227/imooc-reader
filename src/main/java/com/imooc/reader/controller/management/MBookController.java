@@ -54,6 +54,7 @@ public class MBookController {
 
     /**
      * 新增图书接口
+     *
      * @param book
      * @return
      */
@@ -109,9 +110,16 @@ public class MBookController {
         result.put("data", new String[]{"/upload/" + filename + suffix});
         return result;
     }
+
+    /**
+     * 更新图书
+     *
+     * @param book
+     * @return
+     */
     @PostMapping("/update")
-    public ResponseUtils updateBook(Book book){
-        ResponseUtils resp ;
+    public ResponseUtils updateBook(Book book) {
+        ResponseUtils resp;
         try {
             System.out.println(book.getDescription());
             Document doc = Jsoup.parse(book.getDescription());
@@ -129,10 +137,29 @@ public class MBookController {
             b.setDescription(book.getDescription());
             b.setCover(cover);
             bookService.updateBook(b);
-            resp = new ResponseUtils().put("book",b);
-        }catch (Exception e){
+            resp = new ResponseUtils().put("book", b);
+        } catch (Exception e) {
             e.printStackTrace();
             resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+        return resp;
+    }
+
+    /**
+     * 根据图书id删除图书
+     *
+     * @param bookId 图书id
+     * @return
+     */
+    @PostMapping("/delete")
+    public ResponseUtils deleteBook(Long bookId) {
+        ResponseUtils resp = null;
+        try {
+            bookService.deleteBook(bookId);
+            resp = new ResponseUtils();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            resp = new ResponseUtils(ex.getClass().getSimpleName(), ex.getMessage());
         }
         return resp;
     }
