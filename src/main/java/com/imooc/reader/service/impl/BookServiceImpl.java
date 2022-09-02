@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author xu
@@ -54,6 +55,14 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book>
     @Override
     public void updateScore() {
         bookMapper.updateScore();
+    }
+
+    @Override
+    public IPage<Map> selectBookMap(Integer page, Integer rows) {
+        IPage p = new Page(page, rows);
+
+        p = bookMapper.selectBookMap(p);
+        return p;
     }
 }
 

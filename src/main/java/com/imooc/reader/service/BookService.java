@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.imooc.reader.entity.Book;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.Map;
+
 /**
  * @author xu
  * @description 针对表【book】的数据库操作Service
@@ -33,4 +35,13 @@ public interface BookService extends IService<Book> {
      * 更新图书评分和评论总人数
      */
     public void updateScore();
+
+    /**
+     * 联合分类信息的分页查询
+     *
+     * @param page 当前页
+     * @param rows 每页显示多少行
+     * @return
+     */
+    public IPage<Map> selectBookMap(Integer page, Integer rows);
 }
