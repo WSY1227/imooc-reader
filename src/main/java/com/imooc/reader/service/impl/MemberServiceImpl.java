@@ -51,6 +51,21 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member>
         memberMapper.insert(member);
         return member;
     }
+
+    @Override
+    public Member checkLogin(String username, String password) {
+        QueryWrapper<Member> wrapper = new QueryWrapper<>();
+        wrapper.eq("username", username);
+        Member member = memberMapper.selectOne(wrapper);
+        if (member == null) {
+            throw new MemberException("用户不存在");
+        }
+        String md5Digest = Md5Utils.md5Digest(password, member.getSalt());
+        if (!md5Digest.equals(member.getPassword())) {
+            throw new MemberException("您输入的密码有误");
+        }
+        return member;
+    }
 }
 
 

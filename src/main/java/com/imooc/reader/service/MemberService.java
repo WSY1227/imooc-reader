@@ -18,4 +18,12 @@ public interface MemberService extends IService<Member> {
      * @return
      */
     public Member createMember(String username, String password, String nickname);
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
+    public Member checkLogin(String username, String password);
 }

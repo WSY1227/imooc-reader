@@ -1,5 +1,6 @@
 package com.imooc.reader.controller;
 
+import com.imooc.reader.entity.Member;
 import com.imooc.reader.service.MemberService;
 import com.imooc.reader.utils.ResponseUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,34 @@ public class MemberController {
             try {
                 memberService.createMember(username, password, nickname);
                 resp = new ResponseUtils();
+            } catch (Exception e) {
+                e.printStackTrace();
+                resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+            }
+        }
+        return resp;
+    }
+
+    /**
+     * 登录
+     *
+     * @param username
+     * @param password
+     * @param vc
+     * @param request
+     * @return
+     */
+    @PostMapping("/check-login")
+    public ResponseUtils checkLogin(String username, String password, String vc, HttpServletRequest request) {
+        String verifyCode = (String) request.getSession().getAttribute("kaptchaVerifyCode");
+        ResponseUtils resp;
+        if (vc == null || verifyCode == null || !vc.equalsIgnoreCase(verifyCode)) {
+            resp = new ResponseUtils("VerifyCodeError", "验证码错误");
+        } else {
+            //验证码通过后开始登陆
+            try {
+                Member member = memberService.checkLogin(username, password);
+                resp = new ResponseUtils().put("member", member);
             } catch (Exception e) {
                 e.printStackTrace();
                 resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
