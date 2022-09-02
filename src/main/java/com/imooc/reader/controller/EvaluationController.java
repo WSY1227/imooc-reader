@@ -1,9 +1,8 @@
 package com.imooc.reader.controller;
 
-import com.imooc.reader.ResponseUtils;
+import com.imooc.reader.utils.ResponseUtils;
 import com.imooc.reader.service.EvaluationService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

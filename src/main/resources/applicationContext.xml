@@ -19,9 +19,16 @@
     <!--开启spring注解扫描-->
     <context:component-scan base-package="com.imooc"/>
     <!--开启mvc注解模式-->
-    <!--设置response格式编码-->
+
     <mvc:annotation-driven>
         <mvc:message-converters>
+            <!--加载LocalDataTime对Json的转化格式-->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.imooc.reader.config.CustomObjectMapper"/>
+                </property>
+            </bean>
+            <!--设置response格式编码-->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>

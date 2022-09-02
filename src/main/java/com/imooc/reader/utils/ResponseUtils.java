@@ -1,4 +1,4 @@
-package com.imooc.reader;
+package com.imooc.reader.utils;
 
 import lombok.Data;
 

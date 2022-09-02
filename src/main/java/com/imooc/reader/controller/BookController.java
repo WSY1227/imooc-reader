@@ -1,7 +1,7 @@
 package com.imooc.reader.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.imooc.reader.ResponseUtils;
+import com.imooc.reader.utils.ResponseUtils;
 import com.imooc.reader.entity.Book;
 import com.imooc.reader.service.BookService;
 import org.springframework.web.bind.annotation.GetMapping;
