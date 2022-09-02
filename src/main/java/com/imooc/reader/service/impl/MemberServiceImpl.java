@@ -66,6 +66,11 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member>
         }
         return member;
     }
+
+    @Override
+    public Member selectById(Long memberId) {
+        return memberMapper.selectById(memberId);
+    }
 }
 
 

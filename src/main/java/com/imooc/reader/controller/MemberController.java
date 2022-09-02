@@ -3,6 +3,7 @@ package com.imooc.reader.controller;
 import com.imooc.reader.entity.Member;
 import com.imooc.reader.service.MemberService;
 import com.imooc.reader.utils.ResponseUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,6 +71,26 @@ public class MemberController {
                 resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
             }
         }
+        return resp;
+    }
+
+    /**
+     * 根据id查询用户信息
+     *
+     * @param memberId
+     * @return
+     */
+    @GetMapping("/select_id")
+    public ResponseUtils checkLogin(Long memberId) {
+        ResponseUtils resp;
+        try {
+            Member member = memberService.selectById(memberId);
+            resp = new ResponseUtils().put("member", member);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+
         return resp;
     }
 }

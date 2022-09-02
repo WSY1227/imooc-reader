@@ -21,9 +21,18 @@ public interface MemberService extends IService<Member> {
 
     /**
      * 登录
+     *
      * @param username
      * @param password
      * @return
      */
     public Member checkLogin(String username, String password);
+
+    /**
+     * 根据id查询信息
+     *
+     * @param memberId
+     * @return
+     */
+    public Member selectById(Long memberId);
 }
