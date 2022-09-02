@@ -51,4 +51,12 @@ public interface BookService extends IService<Book> {
      * @return
      */
     public Book createBook(Book book);
+
+    /**
+     * 更新图书
+     * @param book
+     * @return
+     */
+    public Book updateBook(Book book);
+
 }

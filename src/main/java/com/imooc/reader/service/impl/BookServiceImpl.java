@@ -71,6 +71,13 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book>
         bookMapper.insert(book);
         return book;
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Book updateBook(Book book) {
+        bookMapper.updateById(book);
+        return book;
+    }
 }
 
 

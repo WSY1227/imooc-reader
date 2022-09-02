@@ -109,4 +109,31 @@ public class MBookController {
         result.put("data", new String[]{"/upload/" + filename + suffix});
         return result;
     }
+    @PostMapping("/update")
+    public ResponseUtils updateBook(Book book){
+        ResponseUtils resp ;
+        try {
+            System.out.println(book.getDescription());
+            Document doc = Jsoup.parse(book.getDescription());
+            Elements elements = doc.select("img");
+            if (elements.size() == 0) {
+                resp = new ResponseUtils("ImageNotFoundError", "图书描述未包含封面图片");
+                return resp;
+            }
+            String cover = elements.first().attr("src");
+            Book b = bookService.selectById(book.getBookId());
+            b.setBookName(book.getBookName());
+            b.setSubTitle(book.getSubTitle());
+            b.setAuthor(book.getAuthor());
+            b.setCategoryId(book.getCategoryId());
+            b.setDescription(book.getDescription());
+            b.setCover(cover);
+            bookService.updateBook(b);
+            resp = new ResponseUtils().put("book",b);
+        }catch (Exception e){
+            e.printStackTrace();
+            resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+        return resp;
+    }
 }
