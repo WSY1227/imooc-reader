@@ -30,4 +30,12 @@ public interface EvaluationService extends IService<Evaluation> {
      * @return
      */
     public Evaluation evaluate(Long memberId, Long bookId, Integer score, String content);
+
+    /**
+     * 点赞自增1
+     *
+     * @param evaluationId
+     * @return
+     */
+    public Evaluation enjoy(Long evaluationId);
 }

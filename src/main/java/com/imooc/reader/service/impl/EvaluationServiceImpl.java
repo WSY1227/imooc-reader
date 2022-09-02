@@ -40,6 +40,14 @@ public class EvaluationServiceImpl extends ServiceImpl<EvaluationMapper, Evaluat
         evaluation.setEnjoy(0);
         return null;
     }
+
+    @Override
+    public Evaluation enjoy(Long evaluationId) {
+        Evaluation evaluation = evaluationMapper.selectById(evaluationId);
+        evaluation.setEnjoy(evaluation.getEnjoy() + 1);
+        evaluationMapper.updateById(evaluation);
+        return evaluation;
+    }
 }
 
 

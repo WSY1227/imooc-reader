@@ -56,8 +56,27 @@ public class EvaluationController {
     public ResponseUtils evaluate(Long memberId, Long bookId, Integer score, String content) {
         ResponseUtils resp = null;
         try {
-            Evaluation evaluate = evaluationService.evaluate(memberId, bookId, score, content);
-            resp = new ResponseUtils().put("evaluate", evaluate);
+            Evaluation evaluation = evaluationService.evaluate(memberId, bookId, score, content);
+            resp = new ResponseUtils().put("evaluation", evaluation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
+        return resp;
+    }
+
+    /**
+     * 点赞接口（自增1）
+     *
+     * @param evaluationId
+     * @return
+     */
+    @PostMapping("/enjoy")
+    public ResponseUtils enjoy(Long evaluationId) {
+        ResponseUtils resp = null;
+        try {
+            Evaluation evaluation = evaluationService.enjoy(evaluationId);
+            resp = new ResponseUtils().put("evaluation", evaluation);
         } catch (Exception e) {
             e.printStackTrace();
             new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
