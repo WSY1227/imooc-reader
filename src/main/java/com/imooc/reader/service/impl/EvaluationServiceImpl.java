@@ -7,6 +7,7 @@ import com.imooc.reader.mapper.EvaluationMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,19 @@ public class EvaluationServiceImpl extends ServiceImpl<EvaluationMapper, Evaluat
     public List<Map> selectByBookId(Long bookId) {
         List<Map> maps = evaluationMapper.selectByBookId(bookId);
         return maps;
+    }
+
+    @Override
+    public Evaluation evaluate(Long memberId, Long bookId, Integer score, String content) {
+        Evaluation evaluation = new Evaluation();
+        evaluation.setMemberId(memberId);
+        evaluation.setBookId(bookId);
+        evaluation.setScore(score);
+        evaluation.setContent(content);
+        evaluation.setCreateTime(LocalDateTime.now());
+        evaluation.setState("enable");
+        evaluation.setEnjoy(0);
+        return null;
     }
 }
 

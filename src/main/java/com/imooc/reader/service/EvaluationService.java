@@ -19,4 +19,15 @@ public interface EvaluationService extends IService<Evaluation> {
      * @return
      */
     public List<Map> selectByBookId(Long bookId);
+
+    /**
+     * 评论
+     *
+     * @param memberId 会员id
+     * @param bookId   图书id
+     * @param score    评分
+     * @param content  评论内容
+     * @return
+     */
+    public Evaluation evaluate(Long memberId, Long bookId, Integer score, String content);
 }
