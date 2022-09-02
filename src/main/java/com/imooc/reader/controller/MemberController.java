@@ -1,6 +1,8 @@
 package com.imooc.reader.controller;
 
 import com.imooc.reader.entity.Member;
+import com.imooc.reader.entity.MemberReadState;
+import com.imooc.reader.service.MemberReadStateService;
 import com.imooc.reader.service.MemberService;
 import com.imooc.reader.utils.ResponseUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 public class MemberController {
     @Resource
     private MemberService memberService;
+    @Resource
+    private MemberReadStateService memberReadStateService;
 
     /**
      * 注册接口
@@ -90,7 +94,26 @@ public class MemberController {
             e.printStackTrace();
             resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
         }
+        return resp;
+    }
 
+    /**
+     * 查询用户阅读状态
+     *
+     * @param memberId 用户id
+     * @param bookId   图书id
+     * @return
+     */
+    @GetMapping("/select_read_state")
+    public ResponseUtils selectMemberReadState(Long memberId, Long bookId) {
+        ResponseUtils resp;
+        try {
+            MemberReadState memberReadState = memberReadStateService.selectMemberReadState(memberId, bookId);
+            resp = new ResponseUtils().put("readState", memberReadState);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp = new ResponseUtils(e.getClass().getSimpleName(), e.getMessage());
+        }
         return resp;
     }
 }
