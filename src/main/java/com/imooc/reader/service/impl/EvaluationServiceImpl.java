@@ -5,6 +5,8 @@ import com.imooc.reader.entity.Evaluation;
 import com.imooc.reader.service.EvaluationService;
 import com.imooc.reader.mapper.EvaluationMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -17,6 +19,7 @@ import java.util.Map;
  * @createDate 2022-09-01 18:34:04
  */
 @Service
+@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 public class EvaluationServiceImpl extends ServiceImpl<EvaluationMapper, Evaluation>
         implements EvaluationService {
     @Resource
@@ -28,6 +31,7 @@ public class EvaluationServiceImpl extends ServiceImpl<EvaluationMapper, Evaluat
         return maps;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Evaluation evaluate(Long memberId, Long bookId, Integer score, String content) {
         Evaluation evaluation = new Evaluation();
@@ -41,6 +45,7 @@ public class EvaluationServiceImpl extends ServiceImpl<EvaluationMapper, Evaluat
         return null;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Evaluation enjoy(Long evaluationId) {
         Evaluation evaluation = evaluationMapper.selectById(evaluationId);

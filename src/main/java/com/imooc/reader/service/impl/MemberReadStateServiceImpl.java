@@ -6,6 +6,8 @@ import com.imooc.reader.entity.MemberReadState;
 import com.imooc.reader.service.MemberReadStateService;
 import com.imooc.reader.mapper.MemberReadStateMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
  * @createDate 2022-09-01 18:34:04
  */
 @Service
+@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 public class MemberReadStateServiceImpl extends ServiceImpl<MemberReadStateMapper, MemberReadState>
         implements MemberReadStateService {
     @Resource
@@ -30,6 +33,7 @@ public class MemberReadStateServiceImpl extends ServiceImpl<MemberReadStateMappe
         return memberReadState;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public MemberReadState updateMemberReadState(Long memberId, Long bookId, Integer readState) {
         QueryWrapper<MemberReadState> wrapper = new QueryWrapper<>();
